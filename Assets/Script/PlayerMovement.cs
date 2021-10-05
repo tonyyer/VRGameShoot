@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 2.5f;
     public Transform cameraPlayer;
-    public float angleLin = 30;
+    public float angleLin = 16;
     void Start()
     {
         
@@ -16,8 +16,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         float angle = cameraPlayer.rotation.eulerAngles.x;
-        if(angle<angleLin){
-            GetComponent<Rigidbody>().velocity = cameraPlayer.forward*speed;
+        if(angle>angleLin){
+            Vector3 direccion = cameraPlayer.forward * speed;
+            direccion = new Vector3(direccion.x,0.05f,direccion.z);
+            GetComponent<Rigidbody>().velocity = direccion;
         }else{
             GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         }
